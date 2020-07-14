@@ -1,0 +1,23 @@
+
+<div class="col-md-12">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th class="th-sm">Name</th>
+                <th class="th-sm">renewalDate</th>
+                <th class="th-sm">Client Health</th>
+                <th class="th-sm">Salesforce</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="users.length>0">
+            <tr *ngFor="let user of users"  >
+                <td>{{user.accountName}}</td>
+                <td>{{user.renewalDate}}</td>
+                <td>{{user.clientHealth}}</td>
+                <td><a href="{{user.salesforceURL}}">Salesforce</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="users.length<=0">no users added yet</p>
+</div>
+
