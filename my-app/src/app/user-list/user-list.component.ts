@@ -30,7 +30,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.userListService = userListService;
   }
   ngOnInit(){
-    this.users = this.userListService.getUserList();
+    this.userListService.getUserList();
     this.userListSub = this.userListService.getUserListUpdatedListener()
     .subscribe((userList:UserListModel[]) => {
       this.users = userList;
