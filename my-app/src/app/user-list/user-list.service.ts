@@ -11,7 +11,7 @@ export class UserListService {
     constructor(private http: HttpClient){}
     
     getUserList(){
-        this.http.get<{message: string, users:UserListModel[]}>('http://localhost:3000/posts')
+        this.http.get<{message: string, users:UserListModel[]}>('http://localhost:3000/users')
             .subscribe((userListData)=>{
                 console.log("user list is: " + userListData.users)
                 console.log("message" + userListData.message)
@@ -26,7 +26,12 @@ export class UserListService {
     }
 
     addUserToList(newUser) {
-        this.userList.push(newUser);
-        this.userListUpdated.next([...this.userList]);
+        this.http.post<{message:string}>('http://localhost:3000/users',newUser)
+            .subscribe((responseData)=> {
+                console.log(responseData.message)
+                this.userList.push(newUser);
+                this.userListUpdated.next([...this.userList]);
+            });
+
     }
 }

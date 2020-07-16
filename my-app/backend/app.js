@@ -1,6 +1,9 @@
 const express = require('express');
+const bodyParser= require('body-parser');
 
 const app= express();
+
+app.use(bodyParser.json());
 
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -15,7 +18,17 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.use('/posts',(req,res,next)=>{
+
+
+app.post('/users', (req,res,next) =>{
+    const user = req.body;
+    console.log(user);
+    res.status(201).json({
+        message:'Post Added well'
+    });
+});
+
+app.use('/users',(req,res,next)=>{
     const users = [
         {   accountID: '123',
             accountName: 'Nintendo',
