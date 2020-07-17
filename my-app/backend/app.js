@@ -1,10 +1,18 @@
 const express = require('express');
 const bodyParser= require('body-parser');
+const mongoose = require('mongoose');
 
 const MongooseUserList = require('./models/user-list');
 
 const app= express();
 
+mongoose.connect('mongodb+srv://jaxonflex:JnjGdA5baJYA6J93@cluster0.wkql7.mongodb.net/node-angular?retryWrites=true&w=majority')
+    .then(()=>{
+    console.log('Connected to data base')
+    })
+    .catch(()=>{
+        console.log('connection to database failed');
+    });
 app.use(bodyParser.json());
 
 app.use((req,res,next)=>{
@@ -37,7 +45,7 @@ app.post('/users', (req,res,next) =>{
         lastContactDate: req.body.lastContactDate
 
     });
-    console.log(user);
+    user.save();//mongoose function for variables of type Mongoose stuff
     
     res.status(201).json({
         message:'Post Added well'
@@ -45,24 +53,19 @@ app.post('/users', (req,res,next) =>{
 });
 
 app.get('/users',(req,res,next)=>{
-    const users = [
-        {   accountID: '123',
-            accountName: 'Nintendo',
-            contactName: 'Kai Wei',
-            email: 'cha@cha.com',
-            salesforceURL: 'www.nevergiveup.com',
-            licenseStartDate: 'June 21 2019',
-            clientHealth: 'Healthy',
-            renewalDate: 'Tomorrow',
-            daysTillRenewal: '20',
-            casesURL: 'www.cases.com',
-            lastContactDate:'July 2 2020',
-        }
-    ];
-    res.status(200).json({
-        message:'Users successfully fetched',
-        users:users,
-    });
+    MongooseUserList.find()
+        .then(documents => {
+            res.status(200).json({
+                message:'Users successfully fetched',
+                users:documents,
+            });
+        });
+
+});
+
+app.delete('/users/:id', (req,res,next) =>{
+    console.log(req.params.id);
+    res.status(200).json({message:"Post Deleted"});
 });
 
 module.exports = app;
