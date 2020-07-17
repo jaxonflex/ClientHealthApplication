@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser= require('body-parser');
 
+const MongooseUserList = require('./models/user-list');
+
 const app= express();
 
 app.use(bodyParser.json());
@@ -21,14 +23,28 @@ app.use((req,res,next)=>{
 
 
 app.post('/users', (req,res,next) =>{
-    const user = req.body;
+    const user = new MongooseUserList({
+        accountID: req.body.accountID,
+        accountName: req.body.accountName,
+        contactName: req.body.contactName,
+        email:req.body.email,
+        salesforceURL:req.body.salesforceURL,
+        licenseStartDate: req.body.licenseStartDate,
+        clientHealth: req.body.clientHealth,
+        renewalDate: req.body.renewalDate,
+        daysTillRenewal: req.body.daysTillRenewal,
+        casesURL: req.body.casesURL,
+        lastContactDate: req.body.lastContactDate
+
+    });
     console.log(user);
+    
     res.status(201).json({
         message:'Post Added well'
     });
 });
 
-app.use('/users',(req,res,next)=>{
+app.get('/users',(req,res,next)=>{
     const users = [
         {   accountID: '123',
             accountName: 'Nintendo',
