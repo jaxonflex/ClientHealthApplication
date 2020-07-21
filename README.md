@@ -1,2 +1,2 @@
 # ClientHealthApplication
-The real version I should use
+A simple CRM application in progress to help manage customers and the goals they have with your company
