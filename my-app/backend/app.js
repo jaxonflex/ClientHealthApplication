@@ -63,6 +63,14 @@ app.get('/users',(req,res,next)=>{
 
 });
 
+app.get('/account/:id',(req,res,next)=>{
+    res.status(200).json({
+        message:"Good job",
+        id:req.params.id,
+
+    })
+})
+
 app.delete('/users/:id', (req,res,next) =>{
     console.log(req.params.id);
     res.status(200).json({message:"Post Deleted"});

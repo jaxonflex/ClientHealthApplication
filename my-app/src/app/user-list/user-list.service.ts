@@ -14,10 +14,7 @@ export class UserListService {
     getUserList(){
         this.http.get<{message: string, users:UserListModel[]}>('http://localhost:3000/users')
             .subscribe((userListData)=>{
-                console.log("user list is: " + userListData.users)
-                console.log("message" + userListData.message)
                 this.userList = userListData.users;
-                console.log("userList" + this.userList)
                 this.userListUpdated.next([...this.userList]);
             });
     }
@@ -34,5 +31,9 @@ export class UserListService {
                 this.userListUpdated.next([...this.userList]);
             });
 
+    }
+
+    getSpecificAccount(accountID: string) {
+        return{...this.userList.find(account=> account.accountID === accountID)};
     }
 }

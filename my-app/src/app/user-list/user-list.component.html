@@ -16,6 +16,7 @@
                 <td>{{user.clientHealth}}</td>
                 <td>{{user.accountID}}</td>
                 <td><a href="{{user.salesforceURL}}">Salesforce</a></td>
+                <td><a [routerLink]="['/edit', user.accountID]">Edit</a></td>
             </tr>
         </tbody>
     </table>
