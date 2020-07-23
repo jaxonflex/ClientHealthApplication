@@ -1,7 +1,7 @@
 import {UserListModel} from './user-list.model';
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
+import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent } from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Injectable({providedIn:'root'})
@@ -14,12 +14,11 @@ export class UserListService {
     getUserList(){
         this.http.get<{message: string, users:UserListModel[]}>('http://localhost:3000/users')
             .subscribe((userListData)=>{
-                console.log("user list is: " + userListData.users)
-                console.log("message" + userListData.message)
+                
                 this.userList = userListData.users;
-                console.log("userList" + this.userList)
                 this.userListUpdated.next([...this.userList]);
             });
+            
     }
 
     getUserListUpdatedListener() {
@@ -32,7 +31,19 @@ export class UserListService {
                 console.log(responseData.message)
                 this.userList.push(newUser);
                 this.userListUpdated.next([...this.userList]);
+                
             });
 
+    }
+
+    getSpecificAccount(accountID) {
+        this.http.get<{message: string, users:UserListModel[]}>('http://localhost:3000/account/' + accountID)
+        .subscribe((userListData)=>{
+            
+            this.userList = userListData.users;
+            this.userListUpdated.next([...this.userList]);
+        });
+
+        return{...this.userList.find(account=> account.accountID === accountID)};
     }
 }
