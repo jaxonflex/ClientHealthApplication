@@ -64,11 +64,30 @@ app.get('/users',(req,res,next)=>{
 });
 
 app.get('/account/:id',(req,res,next)=>{
-    res.status(200).json({
-        message:"Good job",
-        id:req.params.id,
+    var myId = req.params.id;
+    console.log(myId);
+    MongooseUserList.findOne({accountID: req.params.id}, (err,obj) => {
+        console.log("Please relax....................." + obj.accountName)})
+        .then(document=> {
+            res.status(200).json({
+                message:"Good job",
+                nothing: "Hi",
+                id:req.params.id,
+                object: obj,
+        
+            })
+        });
 
-    })
+    // MongooseUserList.findOne({accountID: '24601'})
+    //     .then(document=> {
+    //         res.status(200).json({
+    //             message:"Good job",
+    //             nothing: "Hi",
+    //             id:req.params.id,
+        
+    //         })
+    //     })
+
 })
 
 app.delete('/users/:id', (req,res,next) =>{

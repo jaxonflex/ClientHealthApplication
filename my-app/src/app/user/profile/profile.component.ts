@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
 
   private mode = 'create';
   private accountID: string;
-  private userList: UserListModel;
+  userList: UserListModel;
   
 
   
@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
             this.mode='edit';
             this.accountID = paramMap.get('accountID');
             this.userList == this.userListService.getSpecificAccount(this.accountID);
+            console.log(this.userList.email);
         }
         else {
           this.mode='create';
