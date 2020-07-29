@@ -28,7 +28,6 @@ export class UserListService {
     addUserToList(newUser) {
         this.http.post<{message:string}>('http://localhost:3000/users',newUser)
             .subscribe((responseData)=> {
-                console.log(responseData.message)
                 this.userList.push(newUser);
                 this.userListUpdated.next([...this.userList]);
                 
@@ -36,14 +35,14 @@ export class UserListService {
 
     }
 
-    getSpecificAccount(accountID) {
-        this.http.get<{message: string, users:UserListModel[]}>('http://localhost:3000/account/' + accountID)
-        .subscribe((userListData)=>{
-            
-            this.userList = userListData.users;
-            this.userListUpdated.next([...this.userList]);
-        });
+    getSpecificAccount(accountID)  {
+        return{...this.userList.find(account=> account.accountID === accountID)};  
+    }
 
-        return{...this.userList.find(account=> account.accountID === accountID)};
+    updateSpecificAccount(id, user){
+        const newUser = user;
+        this.http.put('http://localhost:3000/users/' + id,user)
+        .subscribe(response => console.log(response));
+
     }
 }

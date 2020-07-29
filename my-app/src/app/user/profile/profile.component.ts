@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { UserListService } from 'src/app/user-list/user-list.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { UserListModel } from 'src/app/user-list/user-list.model';
+import { format } from 'path';
 
 
 @Component({
@@ -36,8 +37,15 @@ export class ProfileComponent implements OnInit {
         if(paramMap.has('accountID')) {
             this.mode='edit';
             this.accountID = paramMap.get('accountID');
-            this.userList == this.userListService.getSpecificAccount(this.accountID);
-            console.log(this.userList.email);
+            //var result = function();
+            this.userList = this.userListService.getSpecificAccount(this.accountID)
+            this.inputAccountID = this.userList.accountID;
+            this.inputAccountName= this.userList.accountName;
+            this.inputContactName = this.userList.contactName;
+            this.inputEmail = this.userList.email;
+
+            
+          
         }
         else {
           this.mode='create';
@@ -46,7 +54,9 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onCreateNewUser() {
+
+
+  onSaveNewUser() {
     const newUserList = {
       accountID:        this.inputAccountID,
       accountName:      this.inputAccountName,
@@ -59,19 +69,33 @@ export class ProfileComponent implements OnInit {
       daysTillRenewal:  this.calcDaysTillRenewal,
       casesURL:         this.inputCasesURL,
       lastContactDate:  this.inputLastContactDate,
-
     };
-    this.userListService.addUserToList(newUserList);
-    this.inputAccountID='';
-    this.inputAccountName='';
-    this.inputContactName='';
-    this.inputEmail ='';
-    this.inputSalesforceURL = '';
-    this.inputLicenseStartDate='';
-    this.inputClientHealth = '';
-    this.inputRenewalDate='';
-    //this.inputDaysTillRenewal='';
-    this.inputCasesURL='';
-    this.inputLastContactDate='';
+    
+    if(this.mode==="create")
+    {
+      console.log("Should not be called");
+      this.userListService.addUserToList(newUserList);
+      this.userListService.addUserToList(newUserList);
+      this.inputAccountID='';
+      this.inputAccountName='';
+      this.inputContactName='';
+      this.inputEmail ='';
+      this.inputSalesforceURL = '';
+      this.inputLicenseStartDate='';
+      this.inputClientHealth = '';
+      this.inputRenewalDate='';
+      //this.inputDaysTillRenewal='';
+      this.inputCasesURL='';
+      this.inputLastContactDate='';
+    }
+    else {
+      this.userList.accountID = this.inputAccountID;
+      console.log(this.userList.accountID);
+
+      this.userListService.updateSpecificAccount(this.userList.accountID, this.userList);
+      //this.userListService.updateSpecificAccount(newUserList);
+    }
+
+
   }
 }

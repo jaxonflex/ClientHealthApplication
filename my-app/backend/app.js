@@ -3,6 +3,7 @@ const bodyParser= require('body-parser');
 const mongoose = require('mongoose');
 
 const MongooseUserList = require('./models/user-list');
+const userList = require('./models/user-list');
 
 const app= express();
 
@@ -70,10 +71,8 @@ app.get('/account/:id',(req,res,next)=>{
         console.log("Please relax....................." + obj.accountName)})
         .then(document=> {
             res.status(200).json({
-                message:"Good job",
-                nothing: "Hi",
-                id:req.params.id,
-                object: obj,
+                
+                users: document,
         
             })
         });
@@ -95,4 +94,27 @@ app.delete('/users/:id', (req,res,next) =>{
     res.status(200).json({message:"Post Deleted"});
 });
 
+app.put("/users/:id", (req,res,next) => {
+   
+    const newUser = new userList({
+        _id :req.body._id,
+        accountID: req.body.accountID,
+        accountName: req.body.accountName,
+        contactName: req.body.contactName,
+        email:req.body.email,
+        salesforceURL:req.body.salesforceURL,
+        licenseStartDate: req.body.licenseStartDate,
+        clientHealth: req.body.clientHealth,
+        renewalDate: req.body.renewalDate,
+        daysTillRenewal: req.body.daysTillRenewal,
+        casesURL: req.body.casesURL,
+        lastContactDate: req.body.lastContactDate
+    })
+    userList.updateOne({accountID:req.params.id}, newUser).then(result=> {
+        console.log("put called" + req.body._id);
+        console.log("the correct id: " + req.body.accountID)
+        console.log("accountID: " + newUser.accountID)
+        res.status(200).json({message:"Update successful"});
+    }) 
+});
 module.exports = app;
