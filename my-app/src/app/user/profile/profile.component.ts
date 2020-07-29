@@ -75,7 +75,6 @@ export class ProfileComponent implements OnInit {
     {
       console.log("Should not be called");
       this.userListService.addUserToList(newUserList);
-      this.userListService.addUserToList(newUserList);
       this.inputAccountID='';
       this.inputAccountName='';
       this.inputContactName='';
@@ -90,7 +89,16 @@ export class ProfileComponent implements OnInit {
     }
     else {
       this.userList.accountID = this.inputAccountID;
-      console.log(this.userList.accountID);
+      this.userList.accountName = this.inputAccountName;
+      this.userList.contactName = this.inputContactName;
+      this.userList.email = this.inputEmail;
+      this.userList.salesforceURL = this.inputSalesforceURL;
+      this.userList.licenseStartDate = this.inputLicenseStartDate;
+      this.userList.renewalDate = this.inputRenewalDate;
+      this.userList.clientHealth = this.inputClientHealth;
+      this.userList.renewalDate = this.inputRenewalDate;
+      this.userList.lastContactDate = this.inputLastContactDate;
+
 
       this.userListService.updateSpecificAccount(this.userList.accountID, this.userList);
       //this.userListService.updateSpecificAccount(newUserList);

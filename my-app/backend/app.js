@@ -110,8 +110,8 @@ app.put("/users/:id", (req,res,next) => {
         casesURL: req.body.casesURL,
         lastContactDate: req.body.lastContactDate
     })
-    userList.updateOne({accountID:req.params.id}, newUser).then(result=> {
-        console.log("put called" + req.body._id);
+    userList.updateOne({_id:req.body._id}, newUser).then(result=> {
+        console.log("put caled" + req.body._id);
         console.log("the correct id: " + req.body.accountID)
         console.log("accountID: " + newUser.accountID)
         res.status(200).json({message:"Update successful"});
