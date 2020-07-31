@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import {ProfileComponent} from './user/profile/profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {UserListComponent} from './user-list/user-list.component';
-import{ViewAccountComponent} from './account/view-account.component';
+import { AccountComponent } from './user/account/account.component';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import{ViewAccountComponent} from './account/view-account.component';
     ProfileComponent,
     NavbarComponent,
     UserListComponent,
-    ViewAccountComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

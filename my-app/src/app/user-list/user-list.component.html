@@ -6,7 +6,8 @@
                 <th class="th-sm">Name</th>
                 <th class="th-sm">renewalDate</th>
                 <th class="th-sm">Client Health</th>
-                <th class="th-sm">Salesforce</th>
+                <th class="th-sm">Accound ID</th>
+                <th class="th-sm">Salesforce URL</th>
             </tr>
         </thead>
         <tbody *ngIf="users.length>0">
@@ -17,6 +18,7 @@
                 <td>{{user.accountID}}</td>
                 <td><a href="{{user.salesforceURL}}">Salesforce</a></td>
                 <td><a [routerLink]="['/edit', user.accountID]">Edit</a></td>
+                <td><a [routerLink]="['/account',user.accountID]">View</a></td>
             </tr>
         </tbody>
     </table>

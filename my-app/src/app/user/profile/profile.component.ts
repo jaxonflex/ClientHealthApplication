@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { UserListService } from 'src/app/user-list/user-list.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { UserListModel } from 'src/app/user-list/user-list.model';
-import { format } from 'path';
+
 
 
 @Component({
@@ -37,15 +37,18 @@ export class ProfileComponent implements OnInit {
         if(paramMap.has('accountID')) {
             this.mode='edit';
             this.accountID = paramMap.get('accountID');
-            //var result = function();
             this.userList = this.userListService.getSpecificAccount(this.accountID)
             this.inputAccountID = this.userList.accountID;
             this.inputAccountName= this.userList.accountName;
             this.inputContactName = this.userList.contactName;
             this.inputEmail = this.userList.email;
+            this.inputSalesforceURL = this.userList.salesforceURL;
+            this.inputRenewalDate = this.userList.renewalDate;
+            this.inputLicenseStartDate = this.userList.licenseStartDate;
+            this.inputClientHealth = this.userList.clientHealth;
+            this.inputCasesURL = this.userList.casesURL;
+            this.inputLastContactDate = this.userList.lastContactDate;
 
-            
-          
         }
         else {
           this.mode='create';
@@ -98,6 +101,7 @@ export class ProfileComponent implements OnInit {
       this.userList.clientHealth = this.inputClientHealth;
       this.userList.renewalDate = this.inputRenewalDate;
       this.userList.lastContactDate = this.inputLastContactDate;
+      this.userList.casesURL = this.inputCasesURL;
 
 
       this.userListService.updateSpecificAccount(this.userList.accountID, this.userList);

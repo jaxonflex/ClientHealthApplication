@@ -57,7 +57,7 @@ app.get('/users',(req,res,next)=>{
     MongooseUserList.find()
         .then(documents => {
             res.status(200).json({
-                message:'Users successfully fetched',
+                message:'Users successfully fetcheds',
                 users:documents,
             });
         });
