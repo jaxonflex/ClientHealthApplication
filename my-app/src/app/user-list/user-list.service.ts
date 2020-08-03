@@ -36,15 +36,11 @@ export class UserListService {
     }
 
     getSpecificAccount(accountID)  {
+        console.log("Called + " + accountID);
         return{...this.userList.find(account=> account.accountID === accountID)};  
     }
 
-    getSpecificAccountView(accountID){
-        console.log("correct account called");
-        this.http.get('http://localhost:3000/account/' + accountID)
-        .subscribe(response=>console.log(response));    
-    
-    }
+
 
     updateSpecificAccount(id, user){
         const newUser = user;

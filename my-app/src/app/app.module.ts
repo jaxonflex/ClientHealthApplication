@@ -9,6 +9,7 @@ import {ProfileComponent} from './user/profile/profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {UserListComponent} from './user-list/user-list.component';
 import { AccountComponent } from './user/account/account.component';
+import {AccountService} from './user/account/account.service';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { AccountComponent } from './user/account/account.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

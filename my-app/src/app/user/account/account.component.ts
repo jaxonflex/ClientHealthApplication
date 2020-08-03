@@ -1,7 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { UserListService } from 'src/app/user-list/user-list.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import {UserListModel} from '../../user-list/user-list.model'
 import { AccountModel } from './account.model';
+import {Subscription} from 'rxjs';
+import { AccountService } from './account.service';
 
 @Component({
     selector: 'app-account',
@@ -10,37 +13,34 @@ import { AccountModel } from './account.model';
 })
 export class AccountComponent implements OnInit{
     account : AccountModel[] = [];
-    constructor(public userListService: UserListService, public route: ActivatedRoute){}
-    userList:UserListService;
+    userList: UserListModel;
+    private sub:Subscription;
+    constructor(public userListService: UserListService, public route: ActivatedRoute, public accountService:AccountService){}
+    
     private paramID: string;
+
+    textAccountID ='';
     
 
     ngOnInit() {
         this.route.paramMap.subscribe((paramMap: ParamMap)=>{
             if(paramMap.has('accountID')) {
                 this.paramID = paramMap.get('accountID');
-                console.log("the result is: " + result);
-                var result = this.userListService.getSpecificAccount(this.paramID);
-                this.returnInfo(this.getAccountInfo,this.assignInfo);
-                console.log(result.accountID);
+                this.userList = this.userListService.getSpecificAccount(this.paramID);
+                this.textAccountID = this.userList.accountID;
+                // this.inputAccountID = this.userList.accountID;
+                // console.log(this.inputAccountID);
+
+                this.accountService.getAccountWithID(this.paramID)
+                .subscribe((data: AccountModel[])=> {
+                    this.account = data;
+                })
+
 
             }
 
         });
     }
 
-    getAccountInfo(){
-        console.log("get account called");
-        return this.userListService.getSpecificAccount(this.paramID)
-    }
-    assignInfo(results){
-        console.log(results);
-    }
-    returnInfo(getInfo,assignInfo){
-        console.log("reutrn info called");
-        var results = getInfo();
-        console.log("get info is done: " + results);
-        assignInfo(results);
-    }
 
 }

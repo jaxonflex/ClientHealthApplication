@@ -9,19 +9,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  // users = [
-  //   {
-  //     accountID: '1234', 
-  //     contactEmail: '1@234.com', 
-  //     accountName: 'Nintendo', 
-  //     contactName: 'mr Sir', 
-  //     salesforceURL:'www.google.com',
-  //     startDate:'1/2/2020',
-  //     clientHealth:'Bad',
-  //     renewalDate:'1/3/2021',
-  //     casesURL:'www.you.rock'
-  // }
-  // ];
+
   users:UserListModel[]=[];
   private userListSub: Subscription;
   userListService: UserListService;

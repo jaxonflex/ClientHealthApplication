@@ -65,27 +65,9 @@ app.get('/users',(req,res,next)=>{
 });
 
 app.get('/account/:id',(req,res,next)=>{
-    var myId = req.params.id;
-    console.log(myId);
-    MongooseUserList.findOne({accountID: req.params.id}, (err,obj) => {
-        console.log("Please relax....................." + obj.accountName)})
-        .then(document=> {
-            res.status(200).json({
-                
-                users: document,
-        
-            })
-        });
-
-    // MongooseUserList.findOne({accountID: '24601'})
-    //     .then(document=> {
-    //         res.status(200).json({
-    //             message:"Good job",
-    //             nothing: "Hi",
-    //             id:req.params.id,
-        
-    //         })
-    //     })
+    res.send({message:"hi"});
+    res.status(201).json({message:"Successfully accessed",
+                });
 
 })
 
