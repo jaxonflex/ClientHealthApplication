@@ -1,6 +1,5 @@
 export interface AccountModel {
     accountID: string;
-    notes: [{body: string, date:string}];
-
-
+    note: string;
+    date: Date;
 }

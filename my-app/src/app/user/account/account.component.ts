@@ -20,6 +20,12 @@ export class AccountComponent implements OnInit{
     private paramID: string;
 
     textAccountID ='';
+    textAccountName = '';
+    textAccountEmail = '';
+    textAccountLastContactDate = '';
+
+    inputNote = '';
+    textDateOfNote = '';
     
 
     ngOnInit() {
@@ -28,10 +34,13 @@ export class AccountComponent implements OnInit{
                 this.paramID = paramMap.get('accountID');
                 this.userList = this.userListService.getSpecificAccount(this.paramID);
                 this.textAccountID = this.userList.accountID;
+                this.textAccountName = this.userList.accountName;
+                this.textAccountEmail = this.userList.email;
+                this.textAccountLastContactDate = this.userList.lastContactDate;
                 // this.inputAccountID = this.userList.accountID;
                 // console.log(this.inputAccountID);
 
-                this.accountService.getAccountWithID(this.paramID)
+                this.accountService.getAccountNotes(this.paramID)
                 .subscribe((data: AccountModel[])=> {
                     this.account = data;
                 })
@@ -40,6 +49,21 @@ export class AccountComponent implements OnInit{
             }
 
         });
+    }
+
+    onAddNewNote(){
+        var date = new Date();
+        this.textDateOfNote = date.toString();
+        
+        const newNote = {
+            accountID : this.textAccountID,
+            note: this.inputNote,
+            date: this.textDateOfNote,
+        }
+        console.log(newNote);
+
+        this.accountService.addNoteToUser(newNote);
+        
     }
 
 

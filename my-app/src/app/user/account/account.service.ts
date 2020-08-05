@@ -8,7 +8,12 @@ import { HttpClient} from '@angular/common/http';
 export class AccountService {
     constructor(private http:HttpClient){}
 
-    getAccountWithID(accountID){
-        return this.http.get(`http://localhost:4000/account/${accountID}`);
+    getAccountNotes(accountID){
+        return this.http.get(`http://localhost:3000/account/${accountID}`);
+    }
+
+    addNoteToUser(newNote){
+        this.http.post<{message:string}>('http://localhost:3000/account', newNote)
+        console.log(newNote)
     }
 }

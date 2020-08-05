@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const MongooseUserList = require('./models/user-list');
 const userList = require('./models/user-list');
 
+const MongooseAccountDisplay = require('./models/account-display')
+
 const app= express();
 
 mongoose.connect('mongodb+srv://jaxonflex:JnjGdA5baJYA6J93@cluster0.wkql7.mongodb.net/node-angular?retryWrites=true&w=majority')
@@ -53,6 +55,13 @@ app.post('/users', (req,res,next) =>{
     });
 });
 
+app.post('/account',(req, res, next) => {
+    console.log("Hello darkness my old friend");
+    res.status(201).json({
+        message:"This should be working"
+    })
+})
+
 app.get('/users',(req,res,next)=>{
     MongooseUserList.find()
         .then(documents => {
@@ -65,9 +74,13 @@ app.get('/users',(req,res,next)=>{
 });
 
 app.get('/account/:id',(req,res,next)=>{
-    res.send({message:"hi"});
-    res.status(201).json({message:"Successfully accessed",
-                });
+    MongooseAccountDisplay.findOne(req.accountID)
+        .then(document => {
+            res.status(201).json({
+                message:"Successfully accessed",
+                account:document,
+            });
+        })
 
 })
 

@@ -25,6 +25,8 @@ export class UserListService {
         return this.userListUpdated.asObservable();//we set the subject as an observable. The subject will actively notify app of new user
     }
 
+
+
     addUserToList(newUser) {
         this.http.post<{message:string}>('http://localhost:3000/users',newUser)
             .subscribe((responseData)=> {

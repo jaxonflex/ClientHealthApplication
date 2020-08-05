@@ -1,1 +1,21 @@
-<p>{{textAccountID}}</p>
+
+
+<div class="container container-small">
+    <p>{{textAccountID}}</p>
+    <p>{{textAccountName}}</p>
+    <p>{{textAccountEmail}}</p>
+    <p>{{textAccountLastContactDate}}</p>
+    <div class="row">
+        <form>
+            <div class="form-group" >
+                <form >
+                    <label for="note">Create New Note</label>
+                    <input [(ngModel)]="inputNote" name="inputNote" class="form-control" placeholder="Enter notes">
+                    <hr>
+                    <button (click)='onAddNewNote()' class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+        </form>
+    </div> 
+</div>
