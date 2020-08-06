@@ -34,6 +34,7 @@ app.use((req,res,next)=>{
 
 
 app.post('/users', (req,res,next) =>{
+    console.log("Post called");
     const user = new MongooseUserList({
         accountID: req.body.accountID,
         accountName: req.body.accountName,
@@ -56,11 +57,19 @@ app.post('/users', (req,res,next) =>{
 });
 
 app.post('/account',(req, res, next) => {
-    console.log("Hello darkness my old friend");
-    res.status(201).json({
-        message:"This should be working"
+    console.log(req.body);
+    
+    
+    const note = new MongooseAccountDisplay({
+        accountID: req.body.accountID,
+        note: req.body.note,
+        date:req.body.date,
     })
-})
+    note.save();
+    res.status(201).json({
+        message:"success"
+    });
+});
 
 app.get('/users',(req,res,next)=>{
     MongooseUserList.find()
@@ -74,12 +83,14 @@ app.get('/users',(req,res,next)=>{
 });
 
 app.get('/account/:id',(req,res,next)=>{
-    MongooseAccountDisplay.findOne(req.accountID)
-        .then(document => {
-            res.status(201).json({
-                message:"Successfully accessed",
-                account:document,
-            });
+    console.log(req.params)
+    MongooseAccountDisplay.find({accountID:req.params.id})
+        .then(documents => {
+            console.log(documents.accountID)
+            res.status(200).json({
+                message:"Notes successfully fetched",
+                notes:documents,
+            })
         })
 
 })

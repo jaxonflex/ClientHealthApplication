@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
+const { stringify } = require('querystring');
 
 const accountDisplaySchema = mongoose.Schema({
     accountID: {type:String, required:true},
-    accountNotes: [{
-        commentID: Number,
-        comment:String,
-        date:String,
-    }]
+    note: {type:String},
+    date:{type:String},
 
 })
 

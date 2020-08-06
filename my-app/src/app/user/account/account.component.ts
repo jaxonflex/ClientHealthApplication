@@ -12,9 +12,9 @@ import { AccountService } from './account.service';
     styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit{
-    account : AccountModel[] = [];
+    accountNotes : AccountModel[] = [];
     userList: UserListModel;
-    private sub:Subscription;
+    private noteSub:Subscription;
     constructor(public userListService: UserListService, public route: ActivatedRoute, public accountService:AccountService){}
     
     private paramID: string;
@@ -39,10 +39,13 @@ export class AccountComponent implements OnInit{
                 this.textAccountLastContactDate = this.userList.lastContactDate;
                 // this.inputAccountID = this.userList.accountID;
                 // console.log(this.inputAccountID);
+                
+                this.accountService.getAccountNotes(this.paramID);
 
-                this.accountService.getAccountNotes(this.paramID)
+                this.noteSub = this.accountService.getAccountNotesUpdatedAsListener()
                 .subscribe((data: AccountModel[])=> {
-                    this.account = data;
+                    this.accountNotes = data;
+                    console.log(this.accountNotes);
                 })
 
 

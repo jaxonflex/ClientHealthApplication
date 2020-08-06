@@ -14,12 +14,13 @@ export class UserListService {
     getUserList(){
         this.http.get<{message: string, users:UserListModel[]}>('http://localhost:3000/users')
             .subscribe((userListData)=>{
-                
                 this.userList = userListData.users;
                 this.userListUpdated.next([...this.userList]);
             });
             
     }
+
+
 
     getUserListUpdatedListener() {
         return this.userListUpdated.asObservable();//we set the subject as an observable. The subject will actively notify app of new user
