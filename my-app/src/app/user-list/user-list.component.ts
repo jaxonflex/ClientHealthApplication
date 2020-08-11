@@ -24,6 +24,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     .subscribe((userList:UserListModel[]) => {
       
       this.users = userList;
+      console.log(this.users);
     });
   }
 

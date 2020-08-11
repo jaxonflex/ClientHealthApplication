@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   calcDaysTillRenewal='';
   inputCasesURL='';
   inputLastContactDate='';
+  inputLicenseType='';
 
   private mode = 'create';
   private accountID: string;
@@ -48,6 +49,7 @@ export class ProfileComponent implements OnInit {
             this.inputClientHealth = this.userList.clientHealth;
             this.inputCasesURL = this.userList.casesURL;
             this.inputLastContactDate = this.userList.lastContactDate;
+            this.inputLicenseType = this.userList.licenseType;
 
         }
         else {
@@ -72,6 +74,7 @@ export class ProfileComponent implements OnInit {
       daysTillRenewal:  this.calcDaysTillRenewal,
       casesURL:         this.inputCasesURL,
       lastContactDate:  this.inputLastContactDate,
+      licenseType:      this.inputLicenseType,
     };
     
     if(this.mode==="create")
@@ -89,6 +92,7 @@ export class ProfileComponent implements OnInit {
       //this.inputDaysTillRenewal='';
       this.inputCasesURL='';
       this.inputLastContactDate='';
+      this.inputLicenseType='';
     }
     else {
       this.userList.accountID = this.inputAccountID;
@@ -102,6 +106,7 @@ export class ProfileComponent implements OnInit {
       this.userList.renewalDate = this.inputRenewalDate;
       this.userList.lastContactDate = this.inputLastContactDate;
       this.userList.casesURL = this.inputCasesURL;
+      this.userList.licenseType = this.inputLicenseType;
 
 
       this.userListService.updateSpecificAccount(this.userList.accountID, this.userList);

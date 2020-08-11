@@ -1,6 +1,5 @@
 <div class="container container-small">
     <div class="row">
-        <form>
             <div class="form-group" >
                 <form >
                     <label for="accountID">Account ID</label>
@@ -32,10 +31,12 @@
                     <hr>
                     <label for="inputLastContactDate">Contact Date</label>
                     <input [(ngModel)]="inputLastContactDate" name="inputLastContactDate" class="form-control" placeholder="Last contact date">
+                    <hr>
+                    <label for="inputLicenseType">License Type</label>
+                    <input [(ngModel)]="inputLicenseType" name="inputLicenseType" class="form-control" placeholder="License Type">
                     <button (click)='onSaveNewUser()' class="btn btn-primary">Submit</button>
 
                 </form>
             </div>
-        </form>
     </div> 
 </div>

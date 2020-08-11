@@ -10,4 +10,5 @@ export interface UserListModel {
     daysTillRenewal: string;
     casesURL: string;
     lastContactDate:string;
+    licenseType:string;
 }

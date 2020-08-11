@@ -39,12 +39,13 @@ export class AccountComponent implements OnInit{
                 this.textAccountLastContactDate = this.userList.lastContactDate;
                 // this.inputAccountID = this.userList.accountID;
                 // console.log(this.inputAccountID);
-                
+
                 this.accountService.getAccountNotes(this.paramID);
 
                 this.noteSub = this.accountService.getAccountNotesUpdatedAsListener()
                 .subscribe((data: AccountModel[])=> {
                     this.accountNotes = data;
+                    console.log("The account notes");
                     console.log(this.accountNotes);
                 })
 

@@ -12,6 +12,7 @@ const userListSchema = mongoose.Schema({
     daysTillRenewal: {type:String},
     casesURL: {type:String},
     lastContactDate:{type:String},
+    licenseType:{type:String},
 });
 
 module.exports = mongoose.model('MongooseUserList',userListSchema);
