@@ -114,7 +114,10 @@ app.put("/users/:id", (req,res,next) => {
         renewalDate: req.body.renewalDate,
         daysTillRenewal: req.body.daysTillRenewal,
         casesURL: req.body.casesURL,
-        lastContactDate: req.body.lastContactDate
+        lastContactDate: req.body.lastContactDate,
+        licenseType:req.body.licenseType,
+        payment:req.body.payment,
+
     })
     userList.updateOne({_id:req.body._id}, newUser).then(result=> {
         console.log("put caled" + req.body._id);

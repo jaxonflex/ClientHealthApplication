@@ -24,10 +24,14 @@ export class ProfileComponent implements OnInit {
   inputCasesURL='';
   inputLastContactDate='';
   inputLicenseType='';
+  inputPayment='';
 
   private mode = 'create';
   private accountID: string;
   userList: UserListModel;
+
+  licenseTypeDropDown = ["Services","Enterprise"];
+  
   
 
   
@@ -75,6 +79,7 @@ export class ProfileComponent implements OnInit {
       casesURL:         this.inputCasesURL,
       lastContactDate:  this.inputLastContactDate,
       licenseType:      this.inputLicenseType,
+      payment:          this.inputPayment,
     };
     
     if(this.mode==="create")
@@ -93,6 +98,7 @@ export class ProfileComponent implements OnInit {
       this.inputCasesURL='';
       this.inputLastContactDate='';
       this.inputLicenseType='';
+      this.inputPayment='';
     }
     else {
       this.userList.accountID = this.inputAccountID;
@@ -107,8 +113,9 @@ export class ProfileComponent implements OnInit {
       this.userList.lastContactDate = this.inputLastContactDate;
       this.userList.casesURL = this.inputCasesURL;
       this.userList.licenseType = this.inputLicenseType;
+      this.userList.payment = this.inputPayment;
 
-
+      console.log("The license type is: " + this.userList.licenseType)
       this.userListService.updateSpecificAccount(this.userList.accountID, this.userList);
       //this.userListService.updateSpecificAccount(newUserList);
     }

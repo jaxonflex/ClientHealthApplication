@@ -44,9 +44,8 @@ export class AccountComponent implements OnInit{
 
                 this.noteSub = this.accountService.getAccountNotesUpdatedAsListener()
                 .subscribe((data: AccountModel[])=> {
+                    data.reverse();
                     this.accountNotes = data;
-                    console.log("The account notes");
-                    console.log(this.accountNotes);
                 })
 
 

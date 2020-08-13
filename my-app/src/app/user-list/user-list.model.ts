@@ -11,4 +11,5 @@ export interface UserListModel {
     casesURL: string;
     lastContactDate:string;
     licenseType:string;
+    payment:string;
 }

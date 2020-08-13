@@ -3,22 +3,29 @@
     <table class="table table-striped table-sm">
         <thead>
             <tr>
+                <th class="th-sm">Account Type</th>
                 <th class="th-sm">Name</th>
+                <th class="th-sm">Yearly Pay</th>
                 <th class="th-sm">renewalDate</th>
                 <th class="th-sm">Client Health</th>
                 <th class="th-sm">Account ID</th>
                 <th class="th-sm">Salesforce URL</th>
+                <th class="th-sm">More</th>
+                <th class="th-sm">Edit</th>
             </tr>
         </thead>
         <tbody *ngIf="users.length>0">
             <tr *ngFor="let user of users"  >
+                <td>{{user.licenseType}}</td>
                 <td>{{user.accountName}}</td>
+                <td>{{user.payment}}</td>
                 <td>{{user.renewalDate}}</td>
                 <td>{{user.clientHealth}}</td>
                 <td>{{user.accountID}}</td>
                 <td><a href="{{user.salesforceURL}}">Salesforce</a></td>
-                <td><a [routerLink]="['/edit', user.accountID]">Edit</a></td>
+                
                 <td><a [routerLink]="['/account',user.accountID]">View</a></td>
+                <td><a [routerLink]="['/edit', user.accountID]">Edit</a></td>
             </tr>
         </tbody>
     </table>

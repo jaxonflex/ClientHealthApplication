@@ -13,6 +13,7 @@ const userListSchema = mongoose.Schema({
     casesURL: {type:String},
     lastContactDate:{type:String},
     licenseType:{type:String},
+    payment:{type:String},
 });
 
 module.exports = mongoose.model('MongooseUserList',userListSchema);

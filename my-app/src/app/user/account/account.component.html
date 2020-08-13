@@ -1,12 +1,16 @@
 
 
 <div class="container container-small">
-    <p>{{textAccountID}}</p>
-    <p>{{textAccountName}}</p>
-    <p>{{textAccountEmail}}</p>
-    <p>{{textAccountLastContactDate}}</p>
     <div class="row">
-        <form>
+        <h3 id="accountName">{{textAccountName}}</h3>
+        
+        <p id="accountID">{{textAccountID}}</p> 
+        <p id="email">{{textAccountEmail}}</p>
+        <p id="lastContact">{{textAccountLastContactDate}}</p>
+    </div>
+    <hr>
+
+
             <div class="form-group" >
                 <form >
                     <label for="note">Create New Note</label>
@@ -16,7 +20,9 @@
 
                 </form>
             </div>
-        </form>
-    </div> 
-    <p *ngFor="let accountnote of accountNotes"  >{{accountnote.note}}</p>
+    <div *ngFor="let accountnote of accountNotes"  >
+        <p>{{accountnote.date}}</p>
+        <p>{{accountnote.note}}</p>
+    </div>
+    
 </div>
