@@ -12,4 +12,7 @@ export interface UserListModel {
     lastContactDate:string;
     licenseType:string;
     payment:string;
+    latestResponse:string;
+    QBR:string;
+    useCase:string;
 }

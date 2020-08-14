@@ -3,26 +3,32 @@
 <div class="container container-small">
     <div class="row">
         <h3 id="accountName">{{textAccountName}}</h3>
-        
-        <p id="accountID">{{textAccountID}}</p> 
-        <p id="email">{{textAccountEmail}}</p>
-        <p id="lastContact">{{textAccountLastContactDate}}</p>
+
+    </div>
+    <div class="row">
+        <p class="accountInfo" id="accountID">{{textAccountID}}</p> 
+        <p class="accountInfo" id="email">{{textAccountEmail}}</p>
+        <p class="accountInfo" id="lastContact">{{textAccountLastContactDate}}</p>
+        <p class="accountInfo" id="QBR" *ngIf="textQBR">{{textQBR}}</p>
     </div>
     <hr>
 
 
-            <div class="form-group" >
-                <form >
-                    <label for="note">Create New Note</label>
-                    <input [(ngModel)]="inputNote" name="inputNote" class="form-control" placeholder="Enter notes">
-                    <hr>
-                    <button (click)='onAddNewNote()' class="btn btn-primary">Submit</button>
+    <div class="form-group" >
+        <form >
+            <label>QBR Date</label>
+            <input [(ngModel)]="textQBR" name="textQBR" class="form-control" placeholder="Enter Last QBR Date">
+            
+            <label for="note">Create New Note</label>
+            <input [(ngModel)]="inputNote" name="inputNote" class="form-control" placeholder="Enter notes">
+            <hr>
+            <button (click)='onAddNewNote()' class="btn btn-primary">Submit</button>
 
-                </form>
-            </div>
-    <div *ngFor="let accountnote of accountNotes"  >
-        <p>{{accountnote.date}}</p>
-        <p>{{accountnote.note}}</p>
+        </form>
+    </div>
+    <div *ngFor="let accountnote of accountNotes">
+        <p class="dateOfNote">{{accountnote.date}}</p>
+        <p class="accountNote">{{accountnote.note}}</p>
     </div>
     
-</div>
+</div> 

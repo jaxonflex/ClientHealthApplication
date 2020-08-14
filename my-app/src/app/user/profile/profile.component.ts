@@ -25,6 +25,9 @@ export class ProfileComponent implements OnInit {
   inputLastContactDate='';
   inputLicenseType='';
   inputPayment='';
+  inputLatestResponse='';
+  inputQBR='';
+  inputUseCase='';
 
   private mode = 'create';
   private accountID: string;
@@ -38,6 +41,8 @@ export class ProfileComponent implements OnInit {
   constructor(public userListService: UserListService, public route: ActivatedRoute){}
 
   ngOnInit() {
+    //onInit check the url and if there is an account ID update inputs in html
+    //and set the mode to edit
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
         if(paramMap.has('accountID')) {
             this.mode='edit';
@@ -54,8 +59,12 @@ export class ProfileComponent implements OnInit {
             this.inputCasesURL = this.userList.casesURL;
             this.inputLastContactDate = this.userList.lastContactDate;
             this.inputLicenseType = this.userList.licenseType;
+            this.inputQBR=this.userList.QBR;
+            this.inputLatestResponse=this.userList.latestResponse;
+            this.inputUseCase=this.userList.useCase;
 
         }
+        //no account id means that we are creating a new user/account
         else {
           this.mode='create';
           this.accountID=null;
@@ -66,6 +75,7 @@ export class ProfileComponent implements OnInit {
 
 
   onSaveNewUser() {
+    //create a newUserList that will be passed into parameter
     const newUserList = {
       accountID:        this.inputAccountID,
       accountName:      this.inputAccountName,
@@ -80,8 +90,9 @@ export class ProfileComponent implements OnInit {
       lastContactDate:  this.inputLastContactDate,
       licenseType:      this.inputLicenseType,
       payment:          this.inputPayment,
+
     };
-    
+    //if we are doing create we are passing newUserList and then clearing out the values
     if(this.mode==="create")
     {
       console.log("Should not be called");
@@ -94,11 +105,14 @@ export class ProfileComponent implements OnInit {
       this.inputLicenseStartDate='';
       this.inputClientHealth = '';
       this.inputRenewalDate='';
-      //this.inputDaysTillRenewal='';
+      
       this.inputCasesURL='';
       this.inputLastContactDate='';
       this.inputLicenseType='';
       this.inputPayment='';
+      this.inputQBR='';
+      this.inputLatestResponse='';
+      this.inputUseCase='';
     }
     else {
       this.userList.accountID = this.inputAccountID;
@@ -115,9 +129,9 @@ export class ProfileComponent implements OnInit {
       this.userList.licenseType = this.inputLicenseType;
       this.userList.payment = this.inputPayment;
 
-      console.log("The license type is: " + this.userList.licenseType)
+      //call update fomr user-list.service.ts and then passing in the account id and userList array
       this.userListService.updateSpecificAccount(this.userList.accountID, this.userList);
-      //this.userListService.updateSpecificAccount(newUserList);
+      
     }
 
 

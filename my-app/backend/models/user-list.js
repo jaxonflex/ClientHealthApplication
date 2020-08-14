@@ -14,6 +14,9 @@ const userListSchema = mongoose.Schema({
     lastContactDate:{type:String},
     licenseType:{type:String},
     payment:{type:String},
+    latestResponse:{type:String},
+    QBR:{type:String},
+    useCase:{type:String},
 });
 
 module.exports = mongoose.model('MongooseUserList',userListSchema);
