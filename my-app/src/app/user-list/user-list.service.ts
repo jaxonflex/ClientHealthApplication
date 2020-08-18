@@ -46,6 +46,7 @@ export class UserListService {
 
 
     updateSpecificAccount(id, user){
+        console.log(user)
         const newUser = user;
         this.http.put('http://localhost:3000/users/' + id,user)
         .subscribe(response => console.log(response));

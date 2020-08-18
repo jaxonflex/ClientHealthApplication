@@ -5,3 +5,29 @@ label{
     margin-top:10px;
     margin-bottom:0px;
 }
+.dateOfNote{
+    margin-bottom: 0px;
+
+    font-size:12px;
+}
+.textContainer{
+    margin-top:3px;
+    margin-left:4px;
+    margin-right:4px;
+}
+.accountNoteBox{
+    border: #ECECEC solid 1px;
+    background-color:#FAFAFA ;
+    border-radius: 5px;
+    margin-bottom:5px;
+}
+button{
+    margin-top:4px;
+    background-color:#343a40;
+    border-color:#ECECEC 
+}
+button:hover{
+    background-color:#ECECEC;
+    border-color:#343a40;
+    color:#343a40;
+}

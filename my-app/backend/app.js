@@ -57,7 +57,7 @@ app.post('/users', (req,res,next) =>{
 });
 
 app.post('/account',(req, res, next) => {
-    console.log(req.body);
+    
     
     
     const note = new MongooseAccountDisplay({
@@ -83,7 +83,7 @@ app.get('/users',(req,res,next)=>{
 });
 
 app.get('/account/:id',(req,res,next)=>{
-    console.log(req.params)
+    
     MongooseAccountDisplay.find({accountID:req.params.id})
         .then(documents => {
             console.log(documents.accountID)
@@ -96,12 +96,12 @@ app.get('/account/:id',(req,res,next)=>{
 })
 
 app.delete('/users/:id', (req,res,next) =>{
-    console.log(req.params.id);
+    
     res.status(200).json({message:"Post Deleted"});
 });
 
 app.put("/users/:id", (req,res,next) => {
-   
+    
     const newUser = new userList({
         _id :req.body._id,
         accountID: req.body.accountID,
@@ -117,13 +117,28 @@ app.put("/users/:id", (req,res,next) => {
         lastContactDate: req.body.lastContactDate,
         licenseType:req.body.licenseType,
         payment:req.body.payment,
+        QBR:req.body.QBR,
+        useCase:req.body.useCase,
 
     })
-    userList.updateOne({_id:req.body._id}, newUser).then(result=> {
-        console.log("put caled" + req.body._id);
-        console.log("the correct id: " + req.body.accountID)
-        console.log("accountID: " + newUser.accountID)
-        res.status(200).json({message:"Update successful"});
-    }) 
+    const newTask=req.body.outstandingTasks;
+    
+    if(newTask == null){
+        
+        userList.updateOne({_id:req.body._id}, newUser).then(result=> {
+            res.status(200).json({message:"Update successful",result});
+        }) 
+
+    }
+    else{
+        console.log(req.body._id);
+        userList.update({_id:req.body._id},{$push:{oustandingTasks:newTask}}).then(result=>{
+            res.status(200).json({message:"New task added",result});
+        })
+        
+    };
+    
+
+    
 });
 module.exports = app;

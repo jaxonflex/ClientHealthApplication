@@ -6,29 +6,45 @@
 
     </div>
     <div class="row">
-        <p class="accountInfo" id="accountID">{{textAccountID}}</p> 
-        <p class="accountInfo" id="email">{{textAccountEmail}}</p>
-        <p class="accountInfo" id="lastContact">{{textAccountLastContactDate}}</p>
-        <p class="accountInfo" id="QBR" *ngIf="textQBR">{{textQBR}}</p>
+        <p class="accountInfo" id="accountID">Account ID: {{textAccountID}} |</p> 
+        <p class="accountInfo" id="email">{{textAccountEmail}} |</p>
+        <p class="accountInfo" id="lastContact">Last Contact Date: {{textAccountLastContactDate}} |</p>
+        <p class="accountInfo" id="QBR" *ngIf="textQBR">Last QBR: {{textQBR}} </p>
+        
+    </div>
+    <div class="row">
+        <p class="accountInfo" id="useCase" *ngIf="textUseCase"><span class="">Use Case:</span> {{textUseCase}}</p>
     </div>
     <hr>
 
 
     <div class="form-group" >
         <form >
-            <label>QBR Date</label>
-            <input [(ngModel)]="textQBR" name="textQBR" class="form-control" placeholder="Enter Last QBR Date">
-            
+            <div id="additionalUserList">
+                <div id="qbrContainer">
+                    <label *ngIf="!isQBR">QBR Date</label>
+                    <input *ngIf="!isQBR" [(ngModel)]="textQBR" name="textQBR" class="form-control" placeholder="Enter Last QBR Date">
+                </div>
+                <div id="useCaseContainer">
+                    <label *ngIf="!isUseCase">Use Case</label>
+                    <input *ngIf="!isUseCase" [(ngModel)]="textUseCase" name="textUseCase" class="form-control" placeholder="Enter Customer Use Case">
+                </div>
+                <button (click)='onUpdateAdditionalAccountInfo()' class="btn btn-primary">Submit</button>
+            </div>
+            <hr>
+
+
             <label for="note">Create New Note</label>
             <input [(ngModel)]="inputNote" name="inputNote" class="form-control" placeholder="Enter notes">
-            <hr>
             <button (click)='onAddNewNote()' class="btn btn-primary">Submit</button>
 
         </form>
     </div>
-    <div *ngFor="let accountnote of accountNotes">
-        <p class="dateOfNote">{{accountnote.date}}</p>
-        <p class="accountNote">{{accountnote.note}}</p>
+    <div class="accountNoteBox"*ngFor="let accountnote of accountNotes">
+        <div class="textContainer">
+            <p class="dateOfNote">{{accountnote.date}}</p>
+            <p class="accountNote">{{accountnote.note}}</p>
+        </div>
     </div>
     
 </div> 

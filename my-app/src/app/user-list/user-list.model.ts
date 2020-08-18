@@ -12,7 +12,7 @@ export interface UserListModel {
     lastContactDate:string;
     licenseType:string;
     payment:string;
-    latestResponse:string;
+    outstandingTasks;
     QBR:string;
     useCase:string;
 }

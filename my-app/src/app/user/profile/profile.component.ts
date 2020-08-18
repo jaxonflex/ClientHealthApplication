@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
             this.inputLastContactDate = this.userList.lastContactDate;
             this.inputLicenseType = this.userList.licenseType;
             this.inputQBR=this.userList.QBR;
-            this.inputLatestResponse=this.userList.latestResponse;
+            this.inputLatestResponse=this.userList.outstandingTasks;
             this.inputUseCase=this.userList.useCase;
 
         }
@@ -110,9 +110,6 @@ export class ProfileComponent implements OnInit {
       this.inputLastContactDate='';
       this.inputLicenseType='';
       this.inputPayment='';
-      this.inputQBR='';
-      this.inputLatestResponse='';
-      this.inputUseCase='';
     }
     else {
       this.userList.accountID = this.inputAccountID;

@@ -25,11 +25,14 @@ export class AccountComponent implements OnInit{
     textAccountEmail = '';
     textAccountLastContactDate = '';
     textQBR='';
-    textLatestResponse='';
     textUseCase='';
-
+    isQBR=false;
+    isUseCase=false;
     inputNote = '';
     textDateOfNote = '';
+    textOustandingTask="do'nt try it";
+    textOustandingTaskDate='Right now';
+    
     
 
     ngOnInit() {
@@ -44,6 +47,9 @@ export class AccountComponent implements OnInit{
                 this.textAccountName = this.userList.accountName;
                 this.textAccountEmail = this.userList.email;
                 this.textAccountLastContactDate = this.userList.lastContactDate;
+                this.textQBR=this.userList.QBR;
+                this.textUseCase = this.userList.useCase;
+
                 
 
 
@@ -58,6 +64,23 @@ export class AccountComponent implements OnInit{
 
 
             }
+            //checking to see if the QBR has a value for pulling up the input box or not
+            if(this.textQBR.length>1 )
+            {
+                this.isQBR=true;
+            }
+            else {
+                this.isQBR=false;
+            }
+
+            //checking to see if useCase has value for pulling up input box
+            if(this.textUseCase.length>1 )
+            {
+                this.isUseCase=true;
+            }
+            else {
+                this.isUseCase=false;
+            }
 
         });
     }
@@ -71,11 +94,18 @@ export class AccountComponent implements OnInit{
             note: this.inputNote,
             date: this.textDateOfNote,
         }
-        console.log(newNote);
-
         this.accountService.addNoteToUser(newNote);
-        
     }
+    onUpdateAdditionalAccountInfo(){
+        const newTask = {
+            date:this.textOustandingTaskDate,
+            task:this.textOustandingTask,
 
+        }
+        this.userList.QBR = this.textQBR;
+        this.userList.useCase=this.textUseCase;
+        this.userList.outstandingTasks = newTask;
+        this.userListService.updateSpecificAccount(this.userList.accountID,this.userList);
+    }
 
 }

@@ -14,7 +14,7 @@ const userListSchema = mongoose.Schema({
     lastContactDate:{type:String},
     licenseType:{type:String},
     payment:{type:String},
-    latestResponse:{type:String},
+    outstandingTasks:[{task:String, date:String}],
     QBR:{type:String},
     useCase:{type:String},
 });
