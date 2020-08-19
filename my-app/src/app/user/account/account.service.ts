@@ -35,7 +35,7 @@ export class AccountService {
     }
 
     deleteNote(noteID){
-        this.http.delete<{message:string}>(`http://localhost:3000/account/${noteID}`,noteID)
+        this.http.delete<{message:string}>(`http://localhost:3000/account/${noteID}`)
             .subscribe((responseData)=>{
                 console.log(responseData);
             })
