@@ -100,6 +100,20 @@ app.delete('/users/:id', (req,res,next) =>{
     res.status(200).json({message:"Post Deleted"});
 });
 
+app.delete('/account/:id',(req,res,next)=>{
+
+    
+    MongooseAccountDisplay.deleteOne({"_id":req.params.id}, function(err,result) {
+        if(err){
+            res.send(err);
+        } else {
+            console.log(result);
+            res.send(result);
+        }
+    })
+
+})
+
 app.put("/users/:id", (req,res,next) => {
     
     const newUser = new userList({
@@ -132,7 +146,7 @@ app.put("/users/:id", (req,res,next) => {
     }
     else{
         console.log(req.body._id);
-        userList.update({_id:req.body._id},{$push:{oustandingTasks:newTask}}).then(result=>{
+        userList.updateOne({_id:req.body._id},{$push:{outstandingTasks:newTask}}).then(result=>{
             res.status(200).json({message:"New task added",result});
         })
         

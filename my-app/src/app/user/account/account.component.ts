@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit{
     isUseCase=false;
     inputNote = '';
     textDateOfNote = '';
-    textOustandingTask="do'nt try it";
+    textOustandingTask="don't try it";
     textOustandingTaskDate='Right now';
     
     
@@ -108,4 +108,7 @@ export class AccountComponent implements OnInit{
         this.userListService.updateSpecificAccount(this.userList.accountID,this.userList);
     }
 
+    onDeleteNote(noteID){
+        this.accountService.deleteNote(noteID);
+    }
 }
