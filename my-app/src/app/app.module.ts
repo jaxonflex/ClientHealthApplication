@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {UserListComponent} from './user-list/user-list.component';
 import { AccountComponent } from './user/account/account.component';
 import {AccountService} from './user/account/account.service';
+import { MatConfirmDialogComponent } from './dialog/mat-confirm-dialog/mat-confirm-dialog.component';
+
 
 
 
@@ -22,6 +26,8 @@ import {AccountService} from './user/account/account.service';
     NavbarComponent,
     UserListComponent,
     AccountComponent,
+    
+
   ],
   imports: [
     BrowserModule,
@@ -29,9 +35,12 @@ import {AccountService} from './user/account/account.service';
     FormsModule,
     HttpClientModule,
     MatDialogModule,
-
+    BrowserAnimationsModule,
+    MatIconModule,
+    
   ],
   providers: [AccountService],
+  entryComponents:[MatConfirmDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

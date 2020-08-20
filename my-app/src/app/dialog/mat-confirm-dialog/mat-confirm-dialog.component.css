@@ -1,0 +1,23 @@
+.confirm{
+    maring-left:5px;
+    margin-right:5px;
+    border:1px solid;
+    border-radius:5px;
+}
+#yes{
+    color:red;
+
+}
+#yes:hover{
+    background-color:rgba(255, 0, 0, 0.692);
+    color:white;
+}
+#no{
+    border-color:#343a40;
+    background-color:#343a40;
+    color:white;
+}
+#no:hover{
+    background-color:whitesmoke;
+    color:#343a40;
+}

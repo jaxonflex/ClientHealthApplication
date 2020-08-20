@@ -5,6 +5,8 @@ import {UserListModel} from '../../user-list/user-list.model'
 import { AccountModel } from './account.model';
 import {Subscription} from 'rxjs';
 import { AccountService } from './account.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogService } from 'src/app/dialog/dialog.service';
 
 @Component({
     selector: 'app-account',
@@ -15,7 +17,13 @@ export class AccountComponent implements OnInit{
     accountNotes : AccountModel[] = [];
     userList: UserListModel;
     private noteSub:Subscription;
-    constructor(public userListService: UserListService, public route: ActivatedRoute, public accountService:AccountService){}
+    
+    constructor(
+        public userListService: UserListService,
+        public route: ActivatedRoute, 
+        public accountService:AccountService,
+        public dialogService:DialogService,
+        ){}
     
     private paramID: string;
 
@@ -57,6 +65,7 @@ export class AccountComponent implements OnInit{
                 //getting notes associated with the account
                 this.noteSub = this.accountService.getAccountNotesUpdatedAsListener()
                 .subscribe((data: AccountModel[])=> {
+                    console.log(data);
                     //ordering by most recently completed
                     data.reverse();
                     this.accountNotes = data;
@@ -108,7 +117,11 @@ export class AccountComponent implements OnInit{
         this.userListService.updateSpecificAccount(this.userList.accountID,this.userList);
     }
 
-    onDeleteNote(noteID){
-        this.accountService.deleteNote(noteID);
+
+
+    //This is calling the onDeleteConfirm in the dialog.service.ts file. 
+    onDeleteConfirm(noteID){
+        console.log(noteID);
+        this.dialogService.openConfirmDialog(noteID);
     }
 }

@@ -4,6 +4,7 @@ import { HttpClient} from '@angular/common/http';
 import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent } from 'rxjs';
 import { stringify } from 'querystring';
 
+
 @Injectable({
     providedIn:'root'
 })
@@ -11,6 +12,7 @@ export class AccountService {
     constructor(private http:HttpClient){}
     private accountNotes: AccountModel[] = [];
     private accountNotesUpdated = new Subject<AccountModel[]>();
+    
 
     getAccountNotesUpdatedAsListener(){
         return this.accountNotesUpdated.asObservable();
@@ -40,4 +42,5 @@ export class AccountService {
                 console.log(responseData);
             })
     }
+
 }
