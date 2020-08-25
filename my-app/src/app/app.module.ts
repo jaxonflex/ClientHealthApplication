@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +38,8 @@ import { MatConfirmDialogComponent } from './dialog/mat-confirm-dialog/mat-confi
     MatDialogModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatButtonModule,
+    
     
   ],
   providers: [AccountService],

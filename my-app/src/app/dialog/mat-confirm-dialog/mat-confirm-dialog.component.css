@@ -6,18 +6,22 @@
 }
 #yes{
     color:red;
-
+    
 }
 #yes:hover{
     background-color:rgba(255, 0, 0, 0.692);
     color:white;
 }
 #no{
-    border-color:#343a40;
+    
+    color:343a40;
+}
+#no:hover{
+    
     background-color:#343a40;
     color:white;
 }
-#no:hover{
-    background-color:whitesmoke;
-    color:#343a40;
+.btn{
+    width:50%;
+    text-emphasis: bold;
 }

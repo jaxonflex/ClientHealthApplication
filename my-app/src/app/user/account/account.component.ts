@@ -6,7 +6,8 @@ import { AccountModel } from './account.model';
 import {Subscription} from 'rxjs';
 import { AccountService } from './account.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogService } from 'src/app/dialog/dialog.service';
+import { MatConfirmDialogComponent } from 'src/app/dialog/mat-confirm-dialog/mat-confirm-dialog.component';
+
 
 @Component({
     selector: 'app-account',
@@ -18,11 +19,12 @@ export class AccountComponent implements OnInit{
     userList: UserListModel;
     private noteSub:Subscription;
     
+    
     constructor(
         public userListService: UserListService,
         public route: ActivatedRoute, 
         public accountService:AccountService,
-        public dialogService:DialogService,
+        public dialog:MatDialog,
         ){}
     
     private paramID: string;
@@ -121,7 +123,13 @@ export class AccountComponent implements OnInit{
 
     //This is calling the onDeleteConfirm in the dialog.service.ts file. 
     onDeleteConfirm(noteID){
-        console.log(noteID);
-        this.dialogService.openConfirmDialog(noteID);
+        this.dialog.open(MatConfirmDialogComponent,{
+            data:{note_id:noteID},
+            width:"300px",
+            
+        })
+        .afterClosed()
+        .subscribe(result => console.log(result));
+        
     }
 }

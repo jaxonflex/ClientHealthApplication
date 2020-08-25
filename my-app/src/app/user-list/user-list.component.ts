@@ -9,14 +9,15 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit, OnDestroy {
-
+  constructor(userListService:UserListService) {
+    this.userListService = userListService;
+  }
+  
   users:UserListModel[]=[];
   private userListSub: Subscription;
   userListService: UserListService;
 
-  constructor(userListService:UserListService) {
-    this.userListService = userListService;
-  }
+
   ngOnInit(){
     this.userListService.getUserList();
     

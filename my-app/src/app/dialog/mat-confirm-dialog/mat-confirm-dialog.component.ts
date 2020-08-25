@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { DialogService } from '../dialog.service';
+import{MatButtonModule} from '@angular/material/button';
 import { AccountService } from 'src/app/user/account/account.service';
 
 
@@ -12,19 +12,20 @@ import { AccountService } from 'src/app/user/account/account.service';
 })
 export class MatConfirmDialogComponent implements OnInit {
 
-  constructor( private dialog: MatDialog, public dialogService:DialogService, public accountService:AccountService) { }
+  constructor( private dialog: MatDialog, public accountService:AccountService, data:any) { console.log("Data: " + data)}
   noteID;
   ngOnInit(): void {
-    this.noteID = this.dialogService.getNoteID();
+    
   }
   
-  closeDialog(){
-    this.dialogService.closeDialog();
+  closeDialogNo(){
+    this.dialog.closeAll();
   }
-  closeDialogYes(noteID){
-    console.log("Note ID: " + noteID)
-    this.dialogService.closeDialog();
-    this.accountService.deleteNote(noteID)
+  closeDialogYes(){
+    //console.log("Note ID: " + noteID)
+    this.dialog.closeAll();
+    //this.accountService.deleteNote(noteID)
+
   }
 
 }
